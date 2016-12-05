@@ -1,0 +1,13 @@
+.idea
+*.swp
+*.pyc
+node_modules
+!tmp/
+tmp/*
+!tmp/pids/
+tmp/pids/*
+!tmp/pids/.keep
+log/*.log
+!log/.keep
+config/*.json
+.DS_Store
