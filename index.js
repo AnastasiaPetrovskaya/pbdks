@@ -1,12 +1,12 @@
-var express = require('express');
+var express = require('express')
+    path = require('path');
 var express_config =require('./config/express.json').test;
 
-global.app = express();
+global.app = {root_dir: __dirname};
+require('./lib/boot.js')(app, express_config);
 
-app.get('/', function (req, res) {
-  res.send('Hello World!');
-});
+app.http.require_controller('banks');
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!');
-});
+console.log('app.http', app.http);
+
+
