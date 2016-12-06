@@ -1,4 +1,5 @@
 var express = require('express');
+var express_config =require('./config/express.json').test;
 
 global.app = express();
 
