@@ -1,30 +1,30 @@
 var mongoose = require('mongoose'),
-    ObjectId = mongoose.Schema.Types.ObjectId;
-    //validators = require('../validators');
+    ObjectId = mongoose.Schema.Types.ObjectId,
+    Timestamp = require('../lib/utils').Timestamp;
 
 //-----Schema------
+//
+var atmListSchema = new mongoose.Schema({
+    id: Number,
+    limit: Number,
+    name: String
+});
 var bankSchema = mongoose.Schema({
   name: {type: String, required: true, min: 1},
   phone: {
       type: String,
-      required: true,
-      validate: validators.phone_validator
+      required: true
   },
   address: {
       type: String,
-      required: true,
-      validate: validators.phone_validator
+      required: true
   },
   atm: [atmListSchema],
   created: {type: Number, default: Timestamp.now},
   updated: {type: Number, default: Timestamp.now}
 });
 
-var atmListSchema = new mongoose.Schema({
-    id: Number,
-    limit: Number,
-    name: String
-});
+
 
 //----Statics-------
 
@@ -33,4 +33,4 @@ var atmListSchema = new mongoose.Schema({
 var Bank = mongoose.model('Bank', bankSchema, 'Banks');
 
 
-module.exports = Client;
+module.exports = Bank;

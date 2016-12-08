@@ -1,12 +1,30 @@
-var express = require('express')
+'use strict'
+
+var express = require('express'),
     path = require('path');
-var express_config =require('./config/express.json').test;
+var express_config =require('./config/express.json');
+var mongo_config =require('./config/mongo.json');
 
-global.app = {root_dir: __dirname};
-require('./lib/boot.js')(app, express_config);
 
-app.http.require_controller('banks');
+global.app = require('./lib/boot.js')({
+    root_dir: __dirname,
+    config: {
+        mongo: mongo_config,
+        express: express_config
+    }
+});
 
-console.log('app.http', app.http);
+var http = app.http;
 
+
+http.set_static(path.join(__dirname, 'static')); /* node-common function */
+http.set('views', path.join(__dirname, 'views'));
+http.set('view engine', 'jade');
+//require('./lib/boot.js')(app);
+http.require_controller('banks');
+http.require_controller('main', {is_root: true});
+require('./lib/models.js')(app);
+
+
+console.log('app', app.http);
 
