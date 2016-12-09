@@ -13,14 +13,15 @@ html
         //Moris Chart Style
         link(href="/js/morris/morris-0.4.3.min.css" rel="stylesheet" type="text/css")
         //Custom Style
-        link(href="/css/custom-style.css" rel="stylesheet" type="text/css")
+        link(href="/css/custom-styles.css" rel="stylesheet" type="text/css")
         //Google Fonts
         link(href="http://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet" type="text/css")
 
 
 
         body.page-header-fixed.compact-menu.page-horizontal-bar
-            main.page-content.content-wrap
+            div#wrapper
+                block vertical-menu
                 block head
                 block body
 
