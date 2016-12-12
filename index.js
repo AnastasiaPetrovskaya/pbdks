@@ -20,7 +20,6 @@ var http = app.http;
 http.set_static(path.join(__dirname, 'static')); /* node-common function */
 http.set('views', path.join(__dirname, 'views'));
 http.set('view engine', 'jade');
-//require('./lib/boot.js')(app);
 http.require_controller('banks');
 http.require_controller('clients');
 http.require_controller('main', {is_root: true});

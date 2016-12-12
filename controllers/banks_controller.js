@@ -1,10 +1,38 @@
-var Bank = app.Bank;
+var Bank = require('../models/bank.js');
 
 
 var get = {
     '/': function(req, res, next) {
-        res.send('Тут будет список банков');
-        console.log('Bank', Bank);
+        //res.send('Тут будет список банков');
+
+        var bank = new Bank({
+            name: 'Тест1',
+            phone: '84953432022',
+            address: 'Тест тест тест'
+        });
+      /*  bank.save(function(err, res) {
+            if (err) {
+                console.log('Error: req: ', req, ' err: ', err);
+                res.error('Error');
+            } else {
+                console.log('res 1', res);
+                res.success({'id': bank.id});
+            }
+        });*/
+
+        var query = Bank.find().skip(0);
+        query.exec()
+            .then(function(banks) {
+                res.render('banks/index', { banks: banks });
+            }).catch(function(err) {
+                console.log('err', err);
+                res.error('Error');
+            });
+
+    },
+
+    '/add': function(req, res, next) {
+        res.render('banks/add');
     },
 
     '/:id': function(req, res, next) {
@@ -14,7 +42,8 @@ var get = {
 
 var post = {
     '/add': function(req, res, next) {
-        res.send('partners /');
+        console.log('req', req.body);
+        res.success({id: 'test'});
     },
 
     '/:id/update': function(req, res, next) {

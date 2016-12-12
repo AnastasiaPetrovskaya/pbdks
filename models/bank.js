@@ -3,12 +3,12 @@ var mongoose = require('mongoose'),
     Timestamp = require('../lib/utils').Timestamp;
 
 //-----Schema------
-//
 var atmListSchema = new mongoose.Schema({
     id: Number,
     limit: Number,
     name: String
 });
+
 var bankSchema = mongoose.Schema({
   name: {type: String, required: true, min: 1},
   phone: {
