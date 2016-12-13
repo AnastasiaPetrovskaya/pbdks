@@ -17,17 +17,11 @@ $(document).ready(function() {
         res = JSON.parse(res);
 
         if (res.success) {
-            bootbox.alert({
-                className: 'success',
-                message: '<a class="alert-link" href="' + res.id + '">Группа</a> успешно создана',
-                buttons: { ok: { className: 'btn-success' }},
-                callback: function() { window.location.reload(); }
-            });
+            window.location.href = '/banks/' + res.id;
         } else {
             console.log(res);
-            $successButton.html('Зарегистрировать').prop('disabled', false);
-            bootboxError(res.error);
-            return false;
+            #TODO страницу с ошибкой
+            window.location.href = '/error';
         }
     });
 });

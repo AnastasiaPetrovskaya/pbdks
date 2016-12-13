@@ -1,24 +1,17 @@
+var mongoose = require('mongoose'),
+ObjectId = require('mongodb').ObjectID;
+
 var Bank = require('../models/bank.js');
 
 
 var get = {
     '/': function(req, res, next) {
-        //res.send('Тут будет список банков');
 
         var bank = new Bank({
             name: 'Тест1',
             phone: '84953432022',
             address: 'Тест тест тест'
         });
-      /*  bank.save(function(err, res) {
-            if (err) {
-                console.log('Error: req: ', req, ' err: ', err);
-                res.error('Error');
-            } else {
-                console.log('res 1', res);
-                res.success({'id': bank.id});
-            }
-        });*/
 
         var query = Bank.find().skip(0);
         query.exec()
@@ -36,6 +29,13 @@ var get = {
     },
 
     '/:id': function(req, res, next) {
+        Bank.findById(ObjectId(req.params.id)).exec()
+            .then(function(bank) {
+                console.log('bank', bank);
+            }).catch(function(err) {
+                console.log('err', err);
+            });
+
         res.send('Тут будет информация о банке с id:' + req.params.id);
     }
 };
@@ -43,7 +43,16 @@ var get = {
 var post = {
     '/add': function(req, res, next) {
         console.log('req', req.body);
-        res.success({id: 'test'});
+        var bank = new Bank(req.body);
+
+        bank.save()
+            .then(function(bank) {
+                console.log('bank', bank);
+                res.success({'id': bank.id});
+            }).catch(function(err) {
+                console.log('err', err);
+                res.error(err);
+            });
     },
 
     '/:id/update': function(req, res, next) {
