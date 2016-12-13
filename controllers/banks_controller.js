@@ -4,13 +4,14 @@ var Bank = require('../models/bank.js');
 var get = {
     '/': function(req, res, next) {
         //res.send('Тут будет список банков');
+        console.log('Bank', Bank);
 
         var bank = new Bank({
             name: 'Тест1',
             phone: '84953432022',
             address: 'Тест тест тест'
         });
-      /*  bank.save(function(err, res) {
+   /*     bank.save(function(err, res) {
             if (err) {
                 console.log('Error: req: ', req, ' err: ', err);
                 res.error('Error');
@@ -36,7 +37,13 @@ var get = {
     },
 
     '/:id': function(req, res, next) {
-        res.send('Тут будет информация о банке с id:' + req.params.id);
+        Bank.findById(req.params.id).exec()
+            .then(function(bank) {
+                res.render('banks/show', {bank: bank});
+            }).catch(function(err) {
+                res.error(err);
+            });
+        //res.send('Тут будет информация о банке с id:' + req.params.id);
     }
 };
 
