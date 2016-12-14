@@ -47,6 +47,10 @@ var get = {
 };
 
 var post = {
+    '/:id/add_atm': function(req, res, next) {
+        console.log('req.body', req.body);
+    },
+
     '/add': function(req, res, next) {
         console.log('req', req.body);
         var bank = new Bank(req.body);

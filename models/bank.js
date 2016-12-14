@@ -3,6 +3,17 @@ var mongoose = require('mongoose'),
     Timestamp = require('../lib/utils').Timestamp;
 
 //-----Schema------
+/*var atm_history = new mongoose.Schema({
+    atm_uid: {type: ObjectId, required: true},
+    type: {type: String, enum: ['cash_in', 'cash_out', 'payment']},
+    time: {type: Number, default: Timestamp.now},
+    sum
+    client: {
+        uid: {type: ObjectId, required: true},
+        name: {type: String}
+    }
+});*/
+
 var atmListSchema = new mongoose.Schema({
     id: Number,
     limit: Number,

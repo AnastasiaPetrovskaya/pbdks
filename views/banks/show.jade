@@ -32,7 +32,6 @@ block body
                     div.panel.panel-default
                         div.panel-heading
                             h4 Банкоматы
-                            button.btn.btn-primary.btn-lg(data-toggle="modal", data-target="#add_atm_modal") Click  Launch Demo Modal
                             a.btn.btn-success#add-atm(data-toggle="modal", data-target="#add_atm_modal") Добавить банкомат
                             div#add_atm_modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
                                 .modal-dialog
@@ -40,8 +39,23 @@ block body
                                         .modal-header
                                             h3 Новый банкомат
                                         .modal-body
+                                            form#add_atm_form(role="form")
+                                                div.form-group
+                                                    label Название банкомата
+                                                    input#name.form-control(name="name")
+                                                div.form-group
+                                                    label Номер
+                                                    input#phone.form-control(name="id")
+                                                div.form-group
+                                                    label Адрес
+                                                    input#address.form-control(name="address")
+                                                div.form-group
+                                                    label Лимит по снятию наличных
+                                                    input#limit.form-control(name="limit")
+                                              //  button.btn.btn-success(type="submit" form="add_atm_form)
                                         .modal-footer
-                                            a.btn.btn-success Добавить
+                                            //button.btn.btn-success(type="submit" form="add_atm_form")
+                                            a#submit.btn.btn-success Добавить
                                             a.btn.btn-danger Отмена
                         div.panel-body
                             div.table-responsive
