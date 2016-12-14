@@ -7,12 +7,6 @@ var Bank = require('../models/bank.js');
 var get = {
     '/': function(req, res, next) {
 
-        var bank = new Bank({
-            name: 'Тест1',
-            phone: '84953432022',
-            address: 'Тест тест тест'
-        });
-
         var query = Bank.find().skip(0);
         query.exec()
             .then(function(banks) {
@@ -28,15 +22,27 @@ var get = {
         res.render('banks/add');
     },
 
-    '/:id': function(req, res, next) {
-        Bank.findById(ObjectId(req.params.id)).exec()
-            .then(function(bank) {
-                console.log('bank', bank);
-            }).catch(function(err) {
-                console.log('err', err);
-            });
+    '/atms': function(req, res, next) {
+        var options = {};
 
-        res.send('Тут будет информация о банке с id:' + req.params.id);
+        if (req.body.bank_id) {
+            options._id = ObjectId(req.body.bank_id);
+        }
+
+        Bank.find(options).exec()
+            .then(function(bank) {
+                res.render('banks/atms_table', {atms: bank.atm});
+            }).catch(function(err) {
+                res.error(err);
+            });
+    },
+    '/:id': function(req, res, next) {
+        Bank.findById(req.params.id).exec()
+            .then(function(bank) {
+                res.render('banks/show', {bank: bank});
+            }).catch(function(err) {
+                res.error(err);
+            });
     }
 };
 

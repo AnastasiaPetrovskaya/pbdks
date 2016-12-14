@@ -1,0 +1,54 @@
+extends ../head
+
+block body
+    div#page-wrapper
+        div#page-inner
+            div.row
+                div.col-md-10.col-md-offset-1
+                    h1.page-header Банк
+            div.row
+                div.col-md-4.col-md-offset-1
+                    div.panel.panel-default
+                        div.panel-heading
+                            h4 Информация о банке
+                        div.panel-body
+                            div.table-responsive
+                                table(style="width:100%")
+                                    tbody
+                                        tr
+                                            td Название
+                                            td #{bank.name}
+                                        tr
+                                            td Телефон
+                                            td #{bank.phone}
+                                        tr
+                                            td Адрес
+                                            td #{bank.address}
+                                        tr
+                                            td Количество банкоматов
+                                            td #{bank.atm.length}
+            div.row
+                div.col-md-10.col-md-offset-1
+                    div.panel.panel-default
+                        div.panel-heading
+                            h4 Банкоматы
+                            button.btn.btn-primary.btn-lg(data-toggle="modal", data-target="#add_atm_modal") Click  Launch Demo Modal
+                            a.btn.btn-success#add-atm(data-toggle="modal", data-target="#add_atm_modal") Добавить банкомат
+                            div#add_atm_modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+                                .modal-dialog
+                                    .modal-content
+                                        .modal-header
+                                            h3 Новый банкомат
+                                        .modal-body
+                                        .modal-footer
+                                            a.btn.btn-success Добавить
+                                            a.btn.btn-danger Отмена
+                        div.panel-body
+                            div.table-responsive
+                                table#atms(style="width:100%")
+
+
+block footer
+    script.
+        partner_id='#{bank.id}'
+    script(src="/js/pages/banks/show.js")

@@ -6,7 +6,8 @@ var mongoose = require('mongoose'),
 var atmListSchema = new mongoose.Schema({
     id: Number,
     limit: Number,
-    name: String
+    name: String,
+    address: String
 });
 
 var bankSchema = mongoose.Schema({
