@@ -1,0 +1,34 @@
+extends ../head
+
+block body
+    div#page-wrapper
+        div#page-inner
+            div.row
+                div.col-md-10.col-md-offset-1
+                    h1.page-header Банки
+            div.row
+                div.col-md-10.col-md-offset-1
+                    div.panel.panel-default
+                        div.panel-heading 
+                        div.panel-body
+                            div.table-responsive
+                                if (clients.length == 0)
+                                    p Нет клиентов
+                                else
+                                    table.table.table-striped(style="width:100%")
+                                        thead
+                                            tr
+                                                th Название
+                                                th Телефон
+                                                th Количество банкоматов
+                                                th
+                                        tbody
+                                            each client in clients
+                                                tr
+                                                    td #{client.name}
+                                                    td #{client.phone}
+                                                    td #{client.atms.length}
+                                                    td
+                                                        a.btn.btn-info.btn-sm(href='/clients/' + client._id title="Подробнее")
+                                                            i.fa.fa-info
+

@@ -22,17 +22,38 @@ var get = {
         res.render('banks/add');
     },
 
+
+    '/:id/atm/:atm_id': function(req, res, next) {
+        var options = {};
+        if (req.params.id) {
+            options._id = ObjectId(req.params.id);
+        }
+        if (req.params.atm_id) {
+            options.atms_id = ObjectId(req.params.id);
+        }
+
+        Bank.findOne({"atms.id": req.params.atm_id}, {'atms.$': 1}).exec()
+            .then(function(bank) {
+                //console.log('res', bank);
+                res.render('banks/atm_info', {atm: bank.atms[0]});
+            }).catch(function(err) {
+                console.log('err', err);
+                res.error(err);
+            });
+    },
+
+
     '/:id/atms': function(req, res, next) {
         var options = {};
 
         if (req.params.id) {
             options._id = ObjectId(req.params.id);
         }
-        console.log('req.params.id', req.params.id);
+        //console.log('req.params.id', req.params.id);
 
         Bank.findOne(options).exec()
             .then(function(bank) {
-                console.log('bank.atms', bank);
+                //console.log('bank.atms', bank);
                 res.render('banks/atms_table', {atms: bank.atms});
             }).catch(function(err) {
                 res.error(err);
@@ -50,13 +71,13 @@ var get = {
 
 var post = {
     '/:id/add_atm': function(req, res, next) {
-        console.log(':id/add_atm');
+        //console.log(':id/add_atm');
         Bank.findById(req.params.id).exec()
             .then(function(bank) {
                 bank.atms.push(req.body);
                 return bank.save();
             }).then(function(res) {
-                console.log('res', res);
+                //console.log('res', res);
                 res.succes();
             }).catch(function(err) {
                 res.error(err);
@@ -64,12 +85,12 @@ var post = {
     },
 
     '/add': function(req, res, next) {
-        console.log('req', req.body);
+        //console.log('req', req.body);
         var bank = new Bank(req.body);
 
         bank.save()
             .then(function(bank) {
-                console.log('bank', bank);
+                //console.log('bank', bank);
                 res.success({'id': bank.id});
             }).catch(function(err) {
                 console.log('err', err);
@@ -82,10 +103,39 @@ var post = {
     }
 };
 
+var put = {
+    '/:id': function(req, res, next) {
+        //console.log('put /:id');
+        //console.log(req.body);
+        var update = {};
+        update['atms.$.' + req.body.name]= req.body.value;
+        Bank.update(
+            {
+                '_id': req.params.id,
+                'atms.id': req.body.pk
+            },
+            {
+                '$set': update
+            },
+            function(err, num_affected) {
+                if (err) {
+                    console.log('err', err);
+                    res.error(err);
+                } else {
+                    res.success();
+                }
+            }
+        );
+    }
+
+};
+
+
 module.exports = {
     resource: 'Banks',
     methods: {
         get: get,
-        post: post
+        post: post,
+        put: put
     }
 };

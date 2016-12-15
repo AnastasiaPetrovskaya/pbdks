@@ -1,6 +1,20 @@
+var mongoose = require('mongoose'),
+ObjectId = require('mongodb').ObjectID;
+
+var Client = require('../models/client.js');
+
 var get = {
     '/': function(req, res, next) {
-        res.send('Тут будет список клиентов');
+        var query = Client.find().skip(0);
+        query.exec()
+            .then(function(clients) {
+                res.render('clients/index', { clients: clients });
+            }).catch(function(err) {
+                console.log('err', err);
+                res.error('Error');
+            });
+
+
     },
 
     '/:id': function(req, res, next) {
