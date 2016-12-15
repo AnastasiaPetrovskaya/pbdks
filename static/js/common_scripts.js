@@ -1,9 +1,9 @@
 var getTable = function(url, options, selector, callback) {
+    console.log('url', url);
 
     $.ajax({
         type: 'GET',
         url: url,
-        data: data,
         success: function(res) {
             $(selector).html(res);
             if (callback)

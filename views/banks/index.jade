@@ -13,7 +13,7 @@ block body
                             a.btn.btn-success(href='/banks/add') Добавить банк
                         div.panel-body
                             div.table-responsive
-                                table.table.tale-stripe.table-bordered.table-hover
+                                table.table.table-striped(style="width:100%")
                                     thead
                                         tr
                                             th Название
@@ -25,7 +25,7 @@ block body
                                             tr
                                                 th #{bank.name}
                                                 th #{bank.phone}
-                                                th #{bank.atm.length}
+                                                th #{bank.atms.length}
                                                 th
                                                     a.btn.btn-info.btn-sm(href='/banks/' + bank._id title="Подробнее")
                                                         i.fa.fa-info

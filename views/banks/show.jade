@@ -26,7 +26,7 @@ block body
                                             td #{bank.address}
                                         tr
                                             td Количество банкоматов
-                                            td #{bank.atm.length}
+                                            td #{bank.atms.length}
             div.row
                 div.col-md-10.col-md-offset-1
                     div.panel.panel-default
@@ -55,14 +55,15 @@ block body
                                               //  button.btn.btn-success(type="submit" form="add_atm_form)
                                         .modal-footer
                                             //button.btn.btn-success(type="submit" form="add_atm_form")
-                                            a#submit.btn.btn-success Добавить
+                                            a#submit.btn.btn-success(data-dismiss="modal") Добавить
                                             a.btn.btn-danger Отмена
                         div.panel-body
                             div.table-responsive
-                                table#atms(style="width:100%")
+                                table#atms.table.table-striped(style="width:100%")
 
 
 block footer
     script.
-        partner_id='#{bank.id}'
+        bank_id='#{bank.id}'
     script(src="/js/pages/banks/show.js")
+    script(src="/js/pages/banks/atms_table.js")

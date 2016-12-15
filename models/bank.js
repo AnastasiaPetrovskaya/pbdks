@@ -31,7 +31,7 @@ var bankSchema = mongoose.Schema({
       type: String,
       required: true
   },
-  atm: [atmListSchema],
+  atms: [atmListSchema],
   created: {type: Number, default: Timestamp.now},
   updated: {type: Number, default: Timestamp.now}
 });

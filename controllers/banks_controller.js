@@ -22,16 +22,18 @@ var get = {
         res.render('banks/add');
     },
 
-    '/atms': function(req, res, next) {
+    '/:id/atms': function(req, res, next) {
         var options = {};
 
-        if (req.body.bank_id) {
-            options._id = ObjectId(req.body.bank_id);
+        if (req.params.id) {
+            options._id = ObjectId(req.params.id);
         }
+        console.log('req.params.id', req.params.id);
 
-        Bank.find(options).exec()
+        Bank.findOne(options).exec()
             .then(function(bank) {
-                res.render('banks/atms_table', {atms: bank.atm});
+                console.log('bank.atms', bank);
+                res.render('banks/atms_table', {atms: bank.atms});
             }).catch(function(err) {
                 res.error(err);
             });
@@ -48,7 +50,17 @@ var get = {
 
 var post = {
     '/:id/add_atm': function(req, res, next) {
-        console.log('req.body', req.body);
+        console.log(':id/add_atm');
+        Bank.findById(req.params.id).exec()
+            .then(function(bank) {
+                bank.atms.push(req.body);
+                return bank.save();
+            }).then(function(res) {
+                console.log('res', res);
+                res.succes();
+            }).catch(function(err) {
+                res.error(err);
+            });
     },
 
     '/add': function(req, res, next) {
