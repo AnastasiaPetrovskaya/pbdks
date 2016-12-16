@@ -28,7 +28,7 @@ block body
                                             td Количество банкоматов
                                             td #{bank.atms.length}
                 div.col-md-5
-                    div.panel.panel-default
+                    div#div_atm_info.panel.panel-default(style="display:none")
                         div.panel-heading
                             h4 Информация о Tepминале
                         div.panel-body
@@ -62,11 +62,44 @@ block body
                                               //  button.btn.btn-success(type="submit" form="add_atm_form)
                                         .modal-footer
                                             //button.btn.btn-success(type="submit" form="add_atm_form")
-                                            a#submit.btn.btn-success(data-dismiss="modal") Добавить
+                                            a#btn_add_atm.btn.btn-success(data-dismiss="modal") Добавить
                                             a.btn.btn-danger Отмена
                         div.panel-body
                             div.table-responsive
                                 table#atms.table.table-striped(style="width:100%")
+            div.row
+                div.col-md-10.col-md-offset-1
+                    div.panel.panel-default
+                        div.panel-heading
+                            h4 Клиенты
+                            a.btn.btn-success#add-client(data-toggle="modal", data-target="#add_client_modal") Добавить клиента
+                            div#add_client_modal.modal.fade(tabindex="-1", role="dialog", aria-hidden="true")
+                                .modal-dialog
+                                    .modal-content
+                                        .modal-header
+                                            h3 Новый клиент
+                                        .modal-body
+                                            form#add_client_form(role="form")
+                                                div.form-group
+                                                    label ФИО
+                                                    input#name.form-control(name="name")
+                                                div.form-group
+                                                    label Номер телефона
+                                                    input#phone.form-control(name="phone")
+                                                div.form-group
+                                                    label Текущий баланс
+                                                    input#current_balance.form-control(name="current_balance")
+                                                div.form-group
+                                                    label Неснимаемы остаток по счету
+                                                    input#min_balance.form-control(name="min_balance")
+                                              //  button.btn.btn-success(type="submit" form="add_atm_form)
+                                        .modal-footer
+                                            //button.btn.btn-success(type="submit" form="add_atm_form")
+                                            a#btn_add_client.btn.btn-success(data-dismiss="modal") Добавить
+                                            a.btn.btn-danger Отмена
+                        div.panel-body
+                            div.table-responsive
+                                table#clients.table.table-striped(style="width:100%")
 
 
 block footer
@@ -74,3 +107,4 @@ block footer
         bank_id='#{bank.id}'
     script(src="/js/pages/banks/show.js")
     script(src="/js/pages/banks/atms_table.js")
+    script(src="/js/pages/clients/clients_table.js")

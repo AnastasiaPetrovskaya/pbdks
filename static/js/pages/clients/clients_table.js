@@ -4,9 +4,9 @@ $(document).ready(function() {
         bank_id: window.bank_id ? window.bank_id : null
     };
 
-    getTable('/banks/' + bank_id + '/atms', options, '#atms', function() {
+    getTable('/clients/table' , options, '#clients', function() {
 
-        $('.atm_info').click(function() {
+       /* $('.atm_info').click(function() {
             window.atm_id = $(this)[0].dataset.id;
             var url = '/banks/' + bank_id + '/atm/' + $(this)[0].dataset.id;
             $('#div_atm_info').css('display', 'block');
@@ -32,7 +32,7 @@ $(document).ready(function() {
                     }
                 });
             });
-        });
+        });*/
     });
 
 });

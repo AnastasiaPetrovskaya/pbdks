@@ -20,7 +20,7 @@ $(document).ready(function() {
             window.location.href = '/banks/' + res.id;
         } else {
             console.log(res);
-            #TODO страницу с ошибкой
+            //#TODO страницу с ошибкой
             window.location.href = '/error';
         }
     });
