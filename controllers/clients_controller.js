@@ -97,11 +97,11 @@ var post = {
         options.client_id = req.params.id;
 
         MoneyTransaction.make(options)
-            .then(function(res) {
-                console.log('in controller res');
-                res.success(res);
+            .then(function(mt) {
+                //console.log('in controller res');
+                res.success(mt);
             }).catch(function(err) {
-                console.log('in controller err', err);
+                //console.log('in controller err', err);
                 res.error(err);
             })
 

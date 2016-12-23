@@ -20,5 +20,6 @@ http.set('views', path.join(__dirname, 'views'));
 http.set('view engine', 'jade');
 http.require_controller('banks');
 http.require_controller('clients');
+http.require_controller('money_transactions');
 http.require_controller('main', {is_root: true});
 require('./lib/models.js')(app);

@@ -27,7 +27,8 @@ $(document).ready(function() {
             type: 'POST',
             url: '/clients/add',
             data: $('#add_client_form').serialize() + "&bank_id=" + bank_id
-        }).done(function() {
+        }).success(function() {
+            window.location.reload();
             //getTable('/banks/' + bank_id + '/atms', options, '#atms', function() {});
         }).fail(function() {
             console.log('err');
