@@ -67,6 +67,7 @@ MoneyTransactionSchema.statics.make = function make(money_transaction) {
                 return ctx.client.save();
             }).then(function(client) {
                 //сохраняем money transaction
+                console.loG('!!!!!!!!!!!!!!!!!!!');
                 var options = money_transaction;
                 options.bank = {};
                 options.bank.uid = money_transaction.bank_id;

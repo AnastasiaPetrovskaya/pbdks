@@ -13,12 +13,12 @@ var get = {
             options.bank = {};
             options.bank.uid = ObjectId(req.query.bank_id);
         }
-        console.log('options', options)
+        //console.log('options', options)
 
         var query = Client.find({'bank.uid':req.query.bank_id}).skip(0);
         query.exec()
             .then(function(clients) {
-                console.log('res clients', clients);
+                //console.log('res clients', clients);
                 res.render('clients/_table', { clients: clients });
             }).catch(function(err) {
                 console.log('err', err);
@@ -35,7 +35,7 @@ var get = {
             options.bank = {};
             options.bank.uid = ObjectId(req.query.bank_id);
         }
-        console.log('options')
+        //console.log('options')
 
         var query = Client.find(options).skip(0);
         query.exec()
@@ -83,7 +83,7 @@ var post = {
 
                 return client.save()
             }).then(function(client) {
-                console.log('client', client);
+                //console.log('client', client);
                 res.success({'id': client.id});
             }).catch(function(err) {
                 console.log('err', err);

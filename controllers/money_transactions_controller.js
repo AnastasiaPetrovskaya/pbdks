@@ -21,7 +21,7 @@ var get = {
 
         MoneyTransaction.find(options).exec()
             .then(function(mts) {
-                console.log('res', mts);
+                //console.log('res', mts);
                 res.render('money_transactions/_table.jade', {mts: mts});
             }).catch(function(err) {
                 console.log('err', err);
